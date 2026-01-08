@@ -1,0 +1,32 @@
+services:
+  mariadb:
+    image: lscr.io/linuxserver/mariadb:latest
+    container_name: mariadb
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+      - MYSQL_ROOT_PASSWORD=Saroj@786
+      - MYSQL_DATABASE=nextclouddb #optional
+      - MYSQL_USER=nish #optional
+      - MYSQL_PASSWORD=Saroj@786 #optional
+      - REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql #optional
+    volumes:
+      - /DATA/Homelab/nextcloud/mariadb/config:/config
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+
+  nextcloud:
+    image: lscr.io/linuxserver/nextcloud:latest
+    container_name: nextcloud
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+    volumes:
+      - /DATA/Homelab/nextcloud/nextcloud/config:/config
+      - /DATA/Homelab/nextcloud/nextcloud/data:/data
+    ports:
+      - 443:443
+    restart: unless-stopped
