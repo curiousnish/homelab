@@ -1,0 +1,14 @@
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    container_name: audiobookshelf
+    ports:
+      - 13378:80
+    volumes:
+      - /DATA/Homelab/audiobookshelf/audiobooks:/audiobooks
+      - /DATA/Homelab/audiobookshelf/podcasts:/podcasts
+      - /DATA/Homelab/audiobookshelf/config:/config
+      - /DATA/Homelab/audiobookshelf/metadata:/metadata
+    environment:
+      - TZ=Asia/Kolkata
+    restart: unless-stopped
