@@ -1,0 +1,12 @@
+services:
+  filebrowser:
+    image: filebrowser/filebrowser
+    container_name: filebrowser
+    user: "0:0"
+    volumes:
+      - /:/srv
+      - /DATA/Homelab/filebrowser/database:/database
+      - /DATA/Homelab/filebrowser/config:/config
+    ports:
+      - 8081:80
+    restart: unless-stopped
